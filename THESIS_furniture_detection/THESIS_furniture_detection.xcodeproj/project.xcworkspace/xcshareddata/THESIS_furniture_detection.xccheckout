@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AD6630EB-C70E-444E-8634-247B87DCFF4D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>THESIS_furniture_detection</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2100B672-4939-40DB-B55E-C8B84FE5595F</key>
+		<string>https://github.com/bschorr/THESIS_mixed_reality_living_spaces</string>
+		<key>BB2A4CAF-9C86-487F-9251-D5972CD60286</key>
+		<string>https://github.com/rezaali/ofxUI</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>THESIS_furniture_detection/THESIS_furniture_detection.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2100B672-4939-40DB-B55E-C8B84FE5595F</key>
+		<string>../../..</string>
+		<key>BB2A4CAF-9C86-487F-9251-D5972CD60286</key>
+		<string>../../../../../addons/ofxUI</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bschorr/THESIS_mixed_reality_living_spaces</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2100B672-4939-40DB-B55E-C8B84FE5595F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BB2A4CAF-9C86-487F-9251-D5972CD60286</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxUI</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2100B672-4939-40DB-B55E-C8B84FE5595F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>THESIS_mixed_reality_living_spaces</string>
+		</dict>
+	</array>
+</dict>
+</plist>

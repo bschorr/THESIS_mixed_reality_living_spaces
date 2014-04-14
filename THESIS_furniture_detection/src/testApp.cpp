@@ -23,11 +23,15 @@ void testApp::update(){
     bDrawLibrary = false;
     bDrawOffice = false;
     
+    
+    
+    /*
     if (incomingPix.first > bedroomPix.first) {
         bDrawBedroom = true;
     } else if (incomingPix.first > cinemaPix.first && incomingPix.second > cinemaPix.second) {
         bDrawCinema = true;
     }
+     */
     
 	
 }
@@ -144,6 +148,43 @@ void testApp::updateCv() {
         secondContourFinder.findContours(secondGrayThresh, blobMinSize, blobMaxSize, 5, false);
         
     }
+    
+    lowArea = 0;
+    highArea = 0;
+    
+    lowBlobNum = 0;
+    highBlobNum = 0;
+    
+    for (int i = 0; i < firstContourFinder.nBlobs; i++){
+        
+        ofVec2f screenPos = ofVec2f(10, 320);
+        
+        std::stringstream output;
+        
+        output <<
+        "area: " << firstContourFinder.blobs[i].area << endl
+        << "x: " << firstContourFinder.blobs[i].boundingRect.getCenter().x << endl
+        << "y: " << firstContourFinder.blobs[i].boundingRect.getCenter().y;
+        
+        ofDrawBitmapString(output.str(), firstContourFinder.blobs[i].boundingRect.getCenter() + screenPos);
+    }
+    
+    for (int i = 0; i < secondContourFinder.nBlobs; i++){
+        
+        ofVec2f screenPos = ofVec2f(420, 320);
+        
+        std::stringstream output;
+        
+        output <<
+        "area: " << secondContourFinder.blobs[i].area << endl
+        << "x: " << secondContourFinder.blobs[i].boundingRect.getCenter().x << endl
+        << "y: " << secondContourFinder.blobs[i].boundingRect.getCenter().y;
+        
+        ofDrawBitmapString(output.str(), secondContourFinder.blobs[i].boundingRect.getCenter()+screenPos);
+    }
+    
+    ofSetColor(255);
+    
 }
 
 //--------------------------------------------------------------
@@ -164,16 +205,50 @@ void testApp::drawDebug(){
     
     ofSetColor(255);
     
-    firstGrayThresh.draw(10, 320, kinectPixels.width / 1.6, kinectPixels.height/ 1.6);
-    firstContourFinder.draw(10, 320, kinectPixels.width / 1.6, kinectPixels.height/ 1.6);
+    firstGrayThresh.draw(10, 320, kinectPixels.width, kinectPixels.height);
+    firstContourFinder.draw(10, 320, kinectPixels.width, kinectPixels.height);
     
-    secondGrayThresh.draw(420, 320, kinectPixels.width / 1.6, kinectPixels.height/ 1.6);
-    secondContourFinder.draw(420, 320, kinectPixels.width / 1.6, kinectPixels.height/ 1.6);
+    secondGrayThresh.draw(420, 320, kinectPixels.width, kinectPixels.height);
+    secondContourFinder.draw(420, 320, kinectPixels.width, kinectPixels.height);
     
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 30, 30);
+    
+    ofSetColor(255, 0, 0);
+    
+    for (int i = 0; i < firstContourFinder.nBlobs; i++){
+        
+        ofVec2f screenPos = ofVec2f(10, 320);
+        
+        std::stringstream output;
+        
+        output <<
+        "area: " << firstContourFinder.blobs[i].area << endl
+        << "x: " << firstContourFinder.blobs[i].boundingRect.getCenter().x << endl
+        << "y: " << firstContourFinder.blobs[i].boundingRect.getCenter().y;
+        
+        ofDrawBitmapString(output.str(), firstContourFinder.blobs[i].boundingRect.getCenter() + screenPos);
+		}
+
+    for (int i = 0; i < secondContourFinder.nBlobs; i++){
+        
+        ofVec2f screenPos = ofVec2f(420, 320);
+        
+        std::stringstream output;
+        
+        output <<
+        "area: " << secondContourFinder.blobs[i].area << endl
+        << "x: " << secondContourFinder.blobs[i].boundingRect.getCenter().x << endl
+        << "y: " << secondContourFinder.blobs[i].boundingRect.getCenter().y;
+        
+        ofDrawBitmapString(output.str(), secondContourFinder.blobs[i].boundingRect.getCenter()+screenPos);
+    }
+    
+    ofSetColor(255);
+
+    /*
     ofDrawBitmapString("IncomingPix - First: " + ofToString(incomingPix.first), 30, 50);
     ofDrawBitmapString("IncomingPix - Second: " +ofToString(incomingPix.second), 30, 70);
-    
+    */
 }
 
 //--------------------------------------------------------------

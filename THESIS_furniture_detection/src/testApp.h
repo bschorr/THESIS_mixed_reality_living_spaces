@@ -69,6 +69,9 @@ class testApp : public ofBaseApp{
     
     int blobMinSize, blobMaxSize;
     
+    int lowArea, highArea;
+    int lowBlobNum, highBlobNum;
+    
     
     //for limiting area of blob tracking
     ofImage kinectPixels;
