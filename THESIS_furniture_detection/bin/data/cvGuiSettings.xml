@@ -1,0 +1,59 @@
+<Canvas>
+    <Kind>40</Kind>
+    <Name>OFX_UI_WIDGET_CANVAS</Name>
+    <IsMinified>0</IsMinified>
+    <XPosition>811.000000000</XPosition>
+    <YPosition>1.000000000</YPosition>
+</Canvas>
+<Widget>
+    <Kind>11</Kind>
+    <Name>Crop Origin</Name>
+    <XValue>135.566497803</XValue>
+    <YValue>56.748767853</YValue>
+</Widget>
+<Widget>
+    <Kind>11</Kind>
+    <Name>Crop Size</Name>
+    <XValue>375.172424316</XValue>
+    <YValue>352.315277100</YValue>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>First Near Threshold</Name>
+    <Value>108.029556274</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>First Far Threshold</Name>
+    <Value>84.162559509</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Second Near Threshold</Name>
+    <Value>129.384246826</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Second Far Threshold</Name>
+    <Value>109.285713196</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Angle</Name>
+    <Value>-24.975370407</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Minimum Blob Size</Name>
+    <Value>5172.413574219</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Maximum Blob Size</Name>
+    <Value>9605.911132812</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Draw Debug</Name>
+    <Value>1</Value>
+</Widget>
