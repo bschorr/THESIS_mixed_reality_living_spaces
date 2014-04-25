@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CB37A7DB-DA02-45EF-BB72-96D3FC6C3063</string>
+	<key>IDESourceControlProjectName</key>
+	<string>THESIS_osc_sender</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7EC62A28-3970-45DD-AB23-234D2E48AE49</key>
+		<string>https://github.com/bschorr/THESIS_mixed_reality_living_spaces</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>THESIS_osc_sender/THESIS_osc_sender.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7EC62A28-3970-45DD-AB23-234D2E48AE49</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bschorr/THESIS_mixed_reality_living_spaces</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7EC62A28-3970-45DD-AB23-234D2E48AE49</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7EC62A28-3970-45DD-AB23-234D2E48AE49</string>
+			<key>IDESourceControlWCCName</key>
+			<string>THESIS_mixed_reality_living_spaces</string>
+		</dict>
+	</array>
+</dict>
+</plist>

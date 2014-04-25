@@ -9,6 +9,8 @@ void testApp::setup(){
     setKinect();
     setOpenCv();
 	setGui();
+    
+    verdana.loadFont("verdana.ttf", 72, true, true);
 
 }
 
@@ -17,18 +19,85 @@ void testApp::update(){
     
     updateCv();
     
-    bDrawBedroom = false;
-    bDrawCinema = false;
-    bDrawDining = false;
-    bDrawLibrary = false;
-    bDrawOffice = false;
+    if (
+        lowBlobNum == 2 &&
+        highBlobNum == 1 &&
+        lowArea > 12000 &&
+        highArea > 9000
+        )
+    {
+        resetCurrentRoom();
+        bDrawDining = true;
+    } else if (
+               lowBlobNum == 1 &&
+               highBlobNum == 0 &&
+               lowArea > 17000 &&
+               highArea < 1000 &&
+               abs(lowLargerBlob.width - lowLargerBlob.height) < 100 &&
+               lowLargerBlob.pos.x < 150
+               )
+    {
+        resetCurrentRoom();
+        bDrawOffice = true;
+    } else if (
+               lowBlobNum == 2 &&
+               highBlobNum == 0 &&
+               lowArea > 17000 &&
+               highArea < 1000 &&
+               lowLargerBlob.pos.x < 150
+               )
+    {
+        resetCurrentRoom();
+        bDrawOffice = true;
+    } else if (
+               lowBlobNum == 1 &&
+               highBlobNum == 0 &&
+               lowArea > 17000 &&
+               highArea < 1000 &&
+               abs(lowLargerBlob.width - lowLargerBlob.height) < 100 &&
+               lowLargerBlob.pos.x > 300
+               )
+    {
+        resetCurrentRoom();
+        bDrawLibrary = true;
+    } else if (
+               lowBlobNum == 2 &&
+               highBlobNum == 0 &&
+               lowArea > 17000 &&
+               highArea < 1000 &&
+               lowLargerBlob.pos.x > 300
+               )
+    {
+        resetCurrentRoom();
+        bDrawLibrary = true;
+    } else if (
+               lowBlobNum == 1 &&
+               highBlobNum == 0 &&
+               lowArea > 17000 &&
+               highArea < 1000 &&
+               lowLargerBlob.width > lowLargerBlob.height
+               )
+    {
+        resetCurrentRoom();
+        bDrawBedroom = true;
+    } else if (
+               lowBlobNum == 1 &&
+               highBlobNum == 0 &&
+               lowArea > 17000 &&
+               highArea < 1000 &&
+               lowLargerBlob.width < lowLargerBlob.height
+               )
+    {
+        resetCurrentRoom();
+        bDrawCinema = true;
+    }
     
     
     
     /*
-    if (incomingPix.first > bedroomPix.first) {
+    if (incomingPix.low > bedroomPix.low) {
         bDrawBedroom = true;
-    } else if (incomingPix.first > cinemaPix.first && incomingPix.second > cinemaPix.second) {
+    } else if (incomingPix.low > cinemaPix.low && incomingPix.high > cinemaPix.high) {
         bDrawCinema = true;
     }
      */
@@ -43,6 +112,22 @@ void testApp::draw(){
     
     if (bDrawDebug) drawDebug();
     
+    string currentRoom;
+    
+    if (bDrawDining) {
+        currentRoom = "Dining";
+    } else if (bDrawOffice) {
+        currentRoom = "Office";
+    } else if (bDrawLibrary) {
+        currentRoom = "Library";
+    } else if (bDrawBedroom) {
+        currentRoom = "Bedroom";
+    } else if (bDrawCinema) {
+        currentRoom = "Cinema";
+    }
+    
+    verdana.drawString(currentRoom, 50, 350);
+    
 //    if (bDrawBedroom) cout << "drawing bedroom!" << endl;
 //    if (bDrawCinema) cout << "drawing cinema!" << endl;
 
@@ -51,9 +136,9 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::exit(){
     cvGui->saveSettings("cvGuiSettings.xml");
-    threshGui->saveSettings("threshGuiSettings.xml");
+    //threshGui->saveSettings("threshGuiSettings.xml");
     delete cvGui;
-    delete threshGui;
+    //delete threshGui;
 }
 
 //--------------------------------------------------------------
@@ -81,11 +166,20 @@ void testApp::setKinect() {
 }
 
 //--------------------------------------------------------------
+void testApp::resetCurrentRoom() {
+    bDrawBedroom = false;
+    bDrawCinema = false;
+    bDrawDining = false;
+    bDrawLibrary = false;
+    bDrawOffice = false;
+}
+
+//--------------------------------------------------------------
 void testApp::setOpenCv() {
     
     colorImg.allocate(kinect.width, kinect.height);
-	firstGrayThresh.allocate(kinect.width, kinect.height);
-	secondGrayThresh.allocate(kinect.width, kinect.height);
+	lowGrayThresh.allocate(kinect.width, kinect.height);
+	highGrayThresh.allocate(kinect.width, kinect.height);
     
 }
 
@@ -101,86 +195,72 @@ void testApp::updateCv() {
         
         kinectPixels.crop(cropOrigin.x, cropOrigin.y, cropSize.x, cropSize.y);
         
-        //firstGrayThresh.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
+        //lowGrayThresh.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
         
-        firstGrayThresh.setFromPixels(kinectPixels.getPixels(), kinectPixels.width, kinectPixels.height);
-        secondGrayThresh.setFromPixels(kinectPixels.getPixels(), kinectPixels.width, kinectPixels.height);
-        
-        incomingPix.first = 0;
-        incomingPix.second = 0;
+        lowGrayThresh.setFromPixels(kinectPixels.getPixels(), kinectPixels.width, kinectPixels.height);
+        highGrayThresh.setFromPixels(kinectPixels.getPixels(), kinectPixels.width, kinectPixels.height);
         
         //do the CV thresholding
-        unsigned char * firstPix = firstGrayThresh.getPixels();
-        unsigned char * secondPix = secondGrayThresh.getPixels();
+        unsigned char * lowPix = lowGrayThresh.getPixels();
+        unsigned char * highPix = highGrayThresh.getPixels();
         
-        int firstNumPixels = firstGrayThresh.getWidth() * firstGrayThresh.getHeight();
+        int lowNumPixels = lowGrayThresh.getWidth() * lowGrayThresh.getHeight();
         
-        //acout << firstGrayThresh.getWidth() << endl;
+        //acout << lowGrayThresh.getWidth() << endl;
         
-        int secondNumPixels = secondGrayThresh.getWidth() * secondGrayThresh.getHeight();
+        int highNumPixels = highGrayThresh.getWidth() * highGrayThresh.getHeight();
         
-        for(int i = 0; i < firstNumPixels; i++) {
-            if(firstPix[i] < firstNearThreshold && firstPix[i] > firstFarThreshold) {
-                firstPix[i] = 255;
-                incomingPix.first++;
+        for(int i = 0; i < lowNumPixels; i++) {
+            if(lowPix[i] < lowNearThreshold && lowPix[i] > lowFarThreshold) {
+                lowPix[i] = 255;
             } else {
-                firstPix[i] = 0;
+                lowPix[i] = 0;
             }
         }
         
-        for(int i = 0; i < secondNumPixels; i++) {
-            if(secondPix[i] < secondNearThreshold && secondPix[i] > secondFarThreshold) {
-                secondPix[i] = 255;
-                incomingPix.second++;
+        for(int i = 0; i < highNumPixels; i++) {
+            if(highPix[i] < highNearThreshold && highPix[i] > highFarThreshold) {
+                highPix[i] = 255;
             } else {
-                secondPix[i] = 0;
+                highPix[i] = 0;
             }
         }
         
         // update the cv images
-        firstGrayThresh.setFromPixels(firstPix, cropSize.x, cropSize.y);
-        secondGrayThresh.setFromPixels(secondPix, cropSize.x, cropSize.y);
+        lowGrayThresh.setFromPixels(lowPix, cropSize.x, cropSize.y);
+        highGrayThresh.setFromPixels(highPix, cropSize.x, cropSize.y);
         
         // find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
 		// also, find holes is set to true so we will get interior contours as well....
-        firstContourFinder.findContours(firstGrayThresh, blobMinSize, blobMaxSize, 5, false);
+        lowContourFinder.findContours(lowGrayThresh, blobMinSize, blobMaxSize, 5, false);
         
-        secondContourFinder.findContours(secondGrayThresh, blobMinSize, blobMaxSize, 5, false);
+        highContourFinder.findContours(highGrayThresh, blobMinSize, blobMaxSize, 5, false);
         
     }
     
     lowArea = 0;
     highArea = 0;
     
-    lowBlobNum = 0;
-    highBlobNum = 0;
+    lowBlobNum = lowContourFinder.nBlobs;
+    highBlobNum = highContourFinder.nBlobs;
     
-    for (int i = 0; i < firstContourFinder.nBlobs; i++){
+    lowLargerBlob.reset();
+    
+    for (int i = 0; i < lowContourFinder.nBlobs; i++){
         
-        ofVec2f screenPos = ofVec2f(10, 320);
+        lowArea += lowContourFinder.blobs[i].area;
         
-        std::stringstream output;
-        
-        output <<
-        "area: " << firstContourFinder.blobs[i].area << endl
-        << "x: " << firstContourFinder.blobs[i].boundingRect.getCenter().x << endl
-        << "y: " << firstContourFinder.blobs[i].boundingRect.getCenter().y;
-        
-        ofDrawBitmapString(output.str(), firstContourFinder.blobs[i].boundingRect.getCenter() + screenPos);
+        if (lowContourFinder.blobs[i].area > lowLargerBlob.area) {
+            lowLargerBlob.index = i;
+            lowLargerBlob.area = lowContourFinder.blobs[i].area;
+            lowLargerBlob.width = lowContourFinder.blobs[i].boundingRect.getWidth();
+            lowLargerBlob.height = lowContourFinder.blobs[i].boundingRect.getHeight();
+            lowLargerBlob.pos = lowContourFinder.blobs[i].boundingRect.getCenter();
+        }
     }
     
-    for (int i = 0; i < secondContourFinder.nBlobs; i++){
-        
-        ofVec2f screenPos = ofVec2f(420, 320);
-        
-        std::stringstream output;
-        
-        output <<
-        "area: " << secondContourFinder.blobs[i].area << endl
-        << "x: " << secondContourFinder.blobs[i].boundingRect.getCenter().x << endl
-        << "y: " << secondContourFinder.blobs[i].boundingRect.getCenter().y;
-        
-        ofDrawBitmapString(output.str(), secondContourFinder.blobs[i].boundingRect.getCenter()+screenPos);
+    for (int i = 0; i < highContourFinder.nBlobs; i++){
+        highArea += highContourFinder.blobs[i].area;
     }
     
     ofSetColor(255);
@@ -205,49 +285,64 @@ void testApp::drawDebug(){
     
     ofSetColor(255);
     
-    firstGrayThresh.draw(10, 320, kinectPixels.width, kinectPixels.height);
-    firstContourFinder.draw(10, 320, kinectPixels.width, kinectPixels.height);
+    lowGrayThresh.draw(10, 320, kinectPixels.width, kinectPixels.height);
+    lowContourFinder.draw(10, 320, kinectPixels.width, kinectPixels.height);
     
-    secondGrayThresh.draw(420, 320, kinectPixels.width, kinectPixels.height);
-    secondContourFinder.draw(420, 320, kinectPixels.width, kinectPixels.height);
+    highGrayThresh.draw(420, 320, kinectPixels.width, kinectPixels.height);
+    highContourFinder.draw(420, 320, kinectPixels.width, kinectPixels.height);
     
-    ofDrawBitmapString(ofToString(ofGetFrameRate()), 30, 30);
+    std::stringstream mainDebug;
+    
+    mainDebug <<
+    "Framerate: " << ofGetFrameRate() << endl
+    << "Low Blobs: " << lowBlobNum << endl
+    << "Low Area: " << lowArea << endl
+    << "High Blobs: " << highBlobNum << endl
+    << "High Area: " << highArea << endl
+    << "Low Larger Blob Width: " << lowLargerBlob.width << endl
+    << "Low Larger Blob Height: " << lowLargerBlob.height;
+    
+    ofDrawBitmapString(mainDebug.str(), 30, 30);
     
     ofSetColor(255, 0, 0);
     
-    for (int i = 0; i < firstContourFinder.nBlobs; i++){
+    for (int i = 0; i < lowContourFinder.nBlobs; i++){
         
         ofVec2f screenPos = ofVec2f(10, 320);
         
         std::stringstream output;
         
         output <<
-        "area: " << firstContourFinder.blobs[i].area << endl
-        << "x: " << firstContourFinder.blobs[i].boundingRect.getCenter().x << endl
-        << "y: " << firstContourFinder.blobs[i].boundingRect.getCenter().y;
+        "area: " << lowContourFinder.blobs[i].area << endl
+        << "x: " << lowContourFinder.blobs[i].boundingRect.getCenter().x << endl
+        << "y: " << lowContourFinder.blobs[i].boundingRect.getCenter().y << endl
+        << "width: " << lowContourFinder.blobs[i].boundingRect.width << endl
+        << "height: " << lowContourFinder.blobs[i].boundingRect.height;
         
-        ofDrawBitmapString(output.str(), firstContourFinder.blobs[i].boundingRect.getCenter() + screenPos);
+        ofDrawBitmapString(output.str(), lowContourFinder.blobs[i].boundingRect.getCenter() + screenPos);
 		}
 
-    for (int i = 0; i < secondContourFinder.nBlobs; i++){
+    for (int i = 0; i < highContourFinder.nBlobs; i++){
         
         ofVec2f screenPos = ofVec2f(420, 320);
         
         std::stringstream output;
         
         output <<
-        "area: " << secondContourFinder.blobs[i].area << endl
-        << "x: " << secondContourFinder.blobs[i].boundingRect.getCenter().x << endl
-        << "y: " << secondContourFinder.blobs[i].boundingRect.getCenter().y;
+        "area: " << highContourFinder.blobs[i].area << endl
+        << "x: " << highContourFinder.blobs[i].boundingRect.getCenter().x << endl
+        << "y: " << highContourFinder.blobs[i].boundingRect.getCenter().y << endl
+        << "width: " << highContourFinder.blobs[i].boundingRect.width << endl
+        << "height: " << highContourFinder.blobs[i].boundingRect.height;
         
-        ofDrawBitmapString(output.str(), secondContourFinder.blobs[i].boundingRect.getCenter()+screenPos);
+        ofDrawBitmapString(output.str(), highContourFinder.blobs[i].boundingRect.getCenter()+screenPos);
     }
     
     ofSetColor(255);
 
     /*
-    ofDrawBitmapString("IncomingPix - First: " + ofToString(incomingPix.first), 30, 50);
-    ofDrawBitmapString("IncomingPix - Second: " +ofToString(incomingPix.second), 30, 70);
+    ofDrawBitmapString("IncomingPix - low: " + ofToString(incomingPix.low), 30, 50);
+    ofDrawBitmapString("IncomingPix - high: " +ofToString(incomingPix.high), 30, 70);
     */
 }
 
@@ -258,32 +353,34 @@ void testApp::setGui() {
     cvGui->addSpacer();
     cvGui->add2DPad("Crop Origin", ofPoint(0, 640), ofPoint(0, 480), cropOrigin);
     cvGui->add2DPad("Crop Size", ofPoint(0, 640), ofPoint(0, 480), cropOrigin);
-    cvGui->addSlider("First Near Threshold", 0, 255, firstNearThreshold);
-    cvGui->addSlider("First Far Threshold", 0, 255, firstFarThreshold);
-    cvGui->addSlider("Second Near Threshold", 0, 255, secondNearThreshold);
-    cvGui->addSlider("Second Far Threshold", 0, 255, secondFarThreshold);
+    cvGui->addSlider("Low Near Threshold", 0, 255, lowNearThreshold);
+    cvGui->addSlider("Low Far Threshold", 0, 255, lowFarThreshold);
+    cvGui->addSlider("High Near Threshold", 0, 255, highNearThreshold);
+    cvGui->addSlider("High Far Threshold", 0, 255, highFarThreshold);
     cvGui->addSlider("Angle", -30, 30, angle);
-    cvGui->addSlider("Minimum Blob Size", 0, 20000, blobMinSize);
-    cvGui->addSlider("Maximum Blob Size", 0, 20000, blobMaxSize);
+    cvGui->addSlider("Minimum Blob Size", 0, 30000, blobMinSize);
+    cvGui->addSlider("Maximum Blob Size", 0, 30000, blobMaxSize);
     cvGui->addToggle("Draw Debug", bDrawDebug);
     cvGui->autoSizeToFitWidgets();
     ofAddListener(cvGui->newGUIEvent,this,&testApp::guiEvent);
     cvGui->loadSettings("cvGuiSettings.xml");
     //cvGui->setPosition(0, 0);
     
+    /*
     threshGui = new ofxUISuperCanvas("Thresholds");
     threshGui->addSpacer();
     
-    threshGui->addSlider("bedroomPix.first", 0, 100, bedroomPix.first);
-    threshGui->addSlider("bedroomPix.second", 0, 100, bedroomPix.second);
+    threshGui->addSlider("bedroomPix.low", 0, 100, bedroomPix.low);
+    threshGui->addSlider("bedroomPix.high", 0, 100, bedroomPix.high);
     
-    threshGui->addSlider("cinemaPix.first", 0, 100, cinemaPix.first);
-    threshGui->addSlider("cinemaPix.second", 0, 100, cinemaPix.second);
+    threshGui->addSlider("cinemaPix.low", 0, 100, cinemaPix.low);
+    threshGui->addSlider("cinemaPix.high", 0, 100, cinemaPix.high);
     
     threshGui->autoSizeToFitWidgets();
     ofAddListener(threshGui->newGUIEvent,this,&testApp::guiEvent);
     threshGui->loadSettings("threshGuiSettings.xml");
     //threshGui->setPosition(212, 0);
+     */
 }
 
 //--------------------------------------------------------------
@@ -305,25 +402,25 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 		cropSize.x = pad->getPercentValue().x*640;
 		cropSize.y = pad->getPercentValue().y*480;
         
-	} else if(name == "First Near Threshold") {
+	} else if(name == "Low Near Threshold") {
         
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
-		firstNearThreshold = slider->getScaledValue();
+		lowNearThreshold = slider->getScaledValue();
 	
-    } else if(name == "First Far Threshold") {
+    } else if(name == "Low Far Threshold") {
         
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
-		firstFarThreshold = slider->getScaledValue();
+		lowFarThreshold = slider->getScaledValue();
 	
-    } else if (name == "Second Near Threshold") {
+    } else if (name == "High Near Threshold") {
         
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
-		secondNearThreshold = slider->getScaledValue();
+		highNearThreshold = slider->getScaledValue();
         
-    } else if(name == "Second Far Threshold") {
+    } else if(name == "High Far Threshold") {
         
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
-		secondFarThreshold = slider->getScaledValue();
+		highFarThreshold = slider->getScaledValue();
         
     } else if (name == "Angle") {
         
@@ -345,30 +442,31 @@ void testApp::guiEvent(ofxUIEventArgs &e)
         
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		bDrawDebug = toggle->getValue();
-        
+ /*
     //from here and under, it's Threshold Gui
-    } else if (name == "bedroomPix.first") {
+    } else if (name == "bedroomPix.low") {
         
         ofxUISlider *slider = (ofxUISlider *) e.widget;
-        bedroomPix.first = slider->getNormalizedValue()*INPUTPIXELS;
+        bedroomPix.low = slider->getNormalizedValue()*INPUTPIXELS;
         
-    } else if (name == "bedroomPix.second") {
-        
-        ofxUISlider *slider = (ofxUISlider *) e.widget;
-        bedroomPix.second = slider->getNormalizedValue()*INPUTPIXELS;
-        
-    } else if (name == "cinemaPix.first") {
+    } else if (name == "bedroomPix.high") {
         
         ofxUISlider *slider = (ofxUISlider *) e.widget;
-        cinemaPix.first = slider->getNormalizedValue()*INPUTPIXELS;
+        bedroomPix.high = slider->getNormalizedValue()*INPUTPIXELS;
         
-    } else if (name == "cinemaPix.second") {
+    } else if (name == "cinemaPix.low") {
         
         ofxUISlider *slider = (ofxUISlider *) e.widget;
-        cinemaPix.second = slider->getNormalizedValue()*INPUTPIXELS;
-        cout << cinemaPix.second << endl;
+        cinemaPix.low = slider->getNormalizedValue()*INPUTPIXELS;
         
+    } else if (name == "cinemaPix.high") {
+        
+        ofxUISlider *slider = (ofxUISlider *) e.widget;
+        cinemaPix.high = slider->getNormalizedValue()*INPUTPIXELS;
+        cout << cinemaPix.high << endl;
+        */
     }
+  
 }
 
 //--------------------------------------------------------------
@@ -381,8 +479,8 @@ void testApp::keyReleased(int key){
     
     switch (key) {
         case 'r':
-            firstGrayThresh.resize(cropSize.x, cropSize.y);
-            secondGrayThresh.resize(cropSize.x, cropSize.y);
+            lowGrayThresh.resize(cropSize.x, cropSize.y);
+            highGrayThresh.resize(cropSize.x, cropSize.y);
             break;
             
         default:

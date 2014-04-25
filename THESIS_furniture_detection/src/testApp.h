@@ -10,7 +10,23 @@
 
 class testApp : public ofBaseApp{
 
-    struct numPixels{
+    struct cvBlob{
+        int area;
+        int index;
+        int width;
+        int height;
+        ofVec2f pos;
+        
+        void reset() {
+            area = 0;
+            index = 0;
+            width = 0;
+            height = 0;
+            pos.set(0, 0);
+        }
+    };
+    
+    struct numPixels {
         int first;
         int second;
     };
@@ -29,6 +45,7 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+        void resetCurrentRoom();
     
         void exit();
     
@@ -39,38 +56,32 @@ class testApp : public ofBaseApp{
     bool bDrawLibrary;
     bool bDrawOffice;
     
-    numPixels bedroomPix;
-    numPixels cinemaPix;
-    numPixels diningPix;
-    numPixels libraryPix;
-    numPixels officePix;
-    
-    
     //declaring the kinect
     ofxKinect kinect;
     void setKinect();
     
     //fancy openCV we'll be using
     ofxCvColorImage colorImg;
-	ofxCvGrayscaleImage firstGrayThresh;
-	ofxCvGrayscaleImage secondGrayThresh;
-	ofxCvContourFinder firstContourFinder;
-    ofxCvContourFinder secondContourFinder;
+	ofxCvGrayscaleImage lowGrayThresh;
+	ofxCvGrayscaleImage highGrayThresh;
+	ofxCvContourFinder lowContourFinder;
+    ofxCvContourFinder highContourFinder;
     void setOpenCv();
     void updateCv();
     void drawDebug();
     bool bDrawDebug;
     
-    int firstNearThreshold;
-	int firstFarThreshold;
+    int lowNearThreshold;
+	int lowFarThreshold;
     
-	int secondNearThreshold;
-	int secondFarThreshold;
+	int highNearThreshold;
+	int highFarThreshold;
     
     int blobMinSize, blobMaxSize;
     
     int lowArea, highArea;
     int lowBlobNum, highBlobNum;
+    cvBlob lowLargerBlob;
     
     
     //for limiting area of blob tracking
@@ -86,5 +97,7 @@ class testApp : public ofBaseApp{
 	
 	int angle;
     
-    numPixels incomingPix;
+    //Debugging tools
+    ofTrueTypeFont	verdana;
+    
 };
