@@ -4,6 +4,7 @@
 #include "ofxOsc.h"
 #include "ofxStateMachine.h"
 #include "SharedData.h"
+#include "Clock.h"
 
 #define PORT 12345
 #define NUM_MSG_STRINGS 20

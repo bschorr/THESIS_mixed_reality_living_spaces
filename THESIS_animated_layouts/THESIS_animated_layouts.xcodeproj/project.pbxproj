@@ -24,6 +24,7 @@
 		AB0B85DB190A1856002320F2 /* Office.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0B85D9190A1856002320F2 /* Office.cpp */; };
 		AB0B85DE190A1860002320F2 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0B85DC190A1860002320F2 /* Library.cpp */; };
 		AB0B85E1190A186B002320F2 /* Cinema.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0B85DF190A186B002320F2 /* Cinema.cpp */; };
+		AB0B85E4190A2606002320F2 /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0B85E2190A2606002320F2 /* Clock.cpp */; };
 		ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADD194746185E2DA11468377 /* IpEndpointName.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC8881B3C8C0A1C45F042E7A /* OscPrintReceivedElements.cpp */; };
@@ -114,6 +115,8 @@
 		AB0B85DD190A1860002320F2 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
 		AB0B85DF190A186B002320F2 /* Cinema.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cinema.cpp; sourceTree = "<group>"; };
 		AB0B85E0190A186B002320F2 /* Cinema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cinema.h; sourceTree = "<group>"; };
+		AB0B85E2190A2606002320F2 /* Clock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
+		AB0B85E3190A2606002320F2 /* Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
 		ADD194746185E2DA11468377 /* IpEndpointName.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = IpEndpointName.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.cpp; sourceTree = SOURCE_ROOT; };
 		AE335EB4709BFD4671EEAC84 /* MessageMappingOscPacketListener.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = MessageMappingOscPacketListener.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/MessageMappingOscPacketListener.h; sourceTree = SOURCE_ROOT; };
 		B31C608870ECEB2490A93736 /* ofxOscParameterSync.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscParameterSync.h; path = ../../../addons/ofxOsc/src/ofxOscParameterSync.h; sourceTree = SOURCE_ROOT; };
@@ -398,6 +401,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
+				AB0B85E2190A2606002320F2 /* Clock.cpp */,
+				AB0B85E3190A2606002320F2 /* Clock.h */,
 				AB0B85C8190A03AC002320F2 /* bedroom */,
 				AB0B85CA190A03CC002320F2 /* office */,
 				AB0B85CD190A03F8002320F2 /* dining */,
@@ -542,6 +547,7 @@
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,
 				AB0B85D8190A1297002320F2 /* Bedroom.cpp in Sources */,
 				A29D8C96AE042ECEAA1BD4F3 /* NetworkingUtilsWin.cpp in Sources */,
+				AB0B85E4190A2606002320F2 /* Clock.cpp in Sources */,
 				28090DEB5109115003E8F1C5 /* UdpSocketWin.cpp in Sources */,
 				62545D179C94265CA1389D4A /* OscOutboundPacketStream.cpp in Sources */,
 				C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */,

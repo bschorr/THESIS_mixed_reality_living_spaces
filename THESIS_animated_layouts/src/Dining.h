@@ -10,11 +10,17 @@
 
 #include "ofxState.h"
 #include "SharedData.h"
+#include "Clock.h"
 
 class Dining : public itg::ofxState<SharedData>
 {
 public:
+    void setup();
 	void update();
 	void draw();
 	string getName();
+    
+    PendulumClock diningClock;
+    
+    
 };

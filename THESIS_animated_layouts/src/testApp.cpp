@@ -18,11 +18,11 @@ void testApp::setup(){
     stateMachine.addState<Dining>();
     stateMachine.addState<Library>();
     stateMachine.addState<Cinema>();
-	stateMachine.changeState("bedroom");
+	stateMachine.changeState("dining");
     
     //setup OSC receiver
     receiver.setup(PORT);
-
+    
 }
 
 //--------------------------------------------------------------

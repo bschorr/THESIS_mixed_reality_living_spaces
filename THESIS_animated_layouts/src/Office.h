@@ -10,6 +10,7 @@
 
 #include "ofxState.h"
 #include "SharedData.h"
+#include "Clock.h"
 
 class Office : public itg::ofxState<SharedData>
 {
@@ -17,4 +18,8 @@ public:
 	void update();
 	void draw();
 	string getName();
+    
+    Clock officeClock;
+    
+    
 };

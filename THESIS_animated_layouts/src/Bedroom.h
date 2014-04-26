@@ -10,11 +10,17 @@
 
 #include "ofxState.h"
 #include "SharedData.h"
+#include "ofMain.h"
+#include "Clock.h"
 
 class Bedroom : public itg::ofxState<SharedData>
 {
 public:
-	void update();
+	void setup();
+    void update();
 	void draw();
 	string getName();
+    ofColor myColor;
+    
+    Clock bedroomClock;
 };

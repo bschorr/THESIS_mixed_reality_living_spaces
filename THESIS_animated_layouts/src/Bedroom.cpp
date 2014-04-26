@@ -8,6 +8,12 @@
 
 #include "Bedroom.h"
 
+void Bedroom::setup()
+{
+    bedroomClock.setup( "bedroom_clock" );
+    
+}
+
 void Bedroom::update()
 {
 
@@ -15,8 +21,9 @@ void Bedroom::update()
 
 void Bedroom::draw()
 {
-	ofBackground(0, 255, 0);
+	ofBackground(200);
 	ofDrawBitmapString("Bedroom", 30, 30);
+    bedroomClock.draw(150, 150, 200, 200);
 }
 
 string Bedroom::getName()
