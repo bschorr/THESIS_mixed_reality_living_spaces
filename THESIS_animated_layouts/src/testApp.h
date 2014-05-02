@@ -5,6 +5,7 @@
 #include "ofxStateMachine.h"
 #include "SharedData.h"
 #include "Clock.h"
+#include "ofxSyphon.h"
 
 #define PORT 12345
 #define NUM_MSG_STRINGS 20
@@ -30,6 +31,9 @@ class testApp : public ofBaseApp{
         //to receive incoming messages
         void oscReceive ();
         ofxOscReceiver receiver;
+    
+        //syphon things out
+        ofxSyphonServer syphonOutput;
     
     private:
     //to control states

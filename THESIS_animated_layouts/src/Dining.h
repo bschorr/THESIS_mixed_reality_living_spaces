@@ -11,6 +11,7 @@
 #include "ofxState.h"
 #include "SharedData.h"
 #include "Clock.h"
+#include "ofxAVFVideoPlayer.h"
 
 class Dining : public itg::ofxState<SharedData>
 {
@@ -19,8 +20,12 @@ public:
 	void update();
 	void draw();
 	string getName();
+    void stateExit();
     
     PendulumClock diningClock;
     
+    ofImage wallOne;
+    ofImage wallTwo;
     
+    ofxAVFVideoPlayer * vidPlayer;
 };

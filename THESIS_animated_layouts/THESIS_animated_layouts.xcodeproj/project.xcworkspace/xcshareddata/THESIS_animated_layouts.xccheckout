@@ -10,8 +10,14 @@
 	<string>THESIS_animated_layouts</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>24AD25A7-0B5C-447C-9177-4EAAA7A3D268</key>
+		<string>https://github.com/astellato/ofxSyphon</string>
+		<key>2958D297-84AC-491D-A8E4-99C78157412B</key>
+		<string>https://github.com/armadillu/ofxImageMask</string>
 		<key>3E0E764F-E1BD-424E-9F7A-718C13F8BA37</key>
 		<string>https://github.com/neilmendoza/ofxStateMachine</string>
+		<key>62A09084-CC75-441B-A5FF-EFA28FB36011</key>
+		<string>https://github.com/kronick/ofxAVFVideoPlayer</string>
 		<key>7EC62A28-3970-45DD-AB23-234D2E48AE49</key>
 		<string>https://github.com/bschorr/THESIS_mixed_reality_living_spaces</string>
 	</dict>
@@ -19,8 +25,14 @@
 	<string>THESIS_animated_layouts/THESIS_animated_layouts.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>24AD25A7-0B5C-447C-9177-4EAAA7A3D268</key>
+		<string>../../../../../addons/ofxSyphon</string>
+		<key>2958D297-84AC-491D-A8E4-99C78157412B</key>
+		<string>../../../../../addons/ofxImageMask</string>
 		<key>3E0E764F-E1BD-424E-9F7A-718C13F8BA37</key>
 		<string>../../../../../addons/ofxStateMachine</string>
+		<key>62A09084-CC75-441B-A5FF-EFA28FB36011</key>
+		<string>../../../../../addons/ofxAVFVideoPlayer</string>
 		<key>7EC62A28-3970-45DD-AB23-234D2E48AE49</key>
 		<string>../../..</string>
 	</dict>
@@ -36,9 +48,33 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>62A09084-CC75-441B-A5FF-EFA28FB36011</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxAVFVideoPlayer</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2958D297-84AC-491D-A8E4-99C78157412B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxImageMask</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>3E0E764F-E1BD-424E-9F7A-718C13F8BA37</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxStateMachine</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>24AD25A7-0B5C-447C-9177-4EAAA7A3D268</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxSyphon</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

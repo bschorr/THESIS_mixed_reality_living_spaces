@@ -10,11 +10,19 @@
 
 #include "ofxState.h"
 #include "SharedData.h"
+#include "ofxAVFVideoPlayer.h"
 
 class Cinema : public itg::ofxState<SharedData>
 {
 public:
-	void update();
+	void setup();
+    void update();
 	void draw();
 	string getName();
+    void stateExit();
+    
+    ofImage wallOne;
+    ofImage wallTwo;
+    
+    ofxAVFVideoPlayer * vidPlayer;
 };

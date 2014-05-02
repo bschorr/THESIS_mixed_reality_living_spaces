@@ -8,34 +8,76 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 
+    ofSetVerticalSync(true);
+    //ofEnableAlphaBlending();
+    //ofEnableSmoothing();
+    
     //setup shared data
-	stateMachine.getSharedData().counter = 0;
-	stateMachine.getSharedData().lastUpdate = 0;
+	stateMachine.getSharedData().syphonOut.allocate(1870, 800, GL_RGBA);
+    stateMachine.getSharedData().wallOne.allocate(935, 800, GL_RGBA);
+    stateMachine.getSharedData().wallTwo.allocate(935, 800, GL_RGBA);
 	
+    stateMachine.getSharedData().syphonOut.begin();
+        ofClear(255,255,255, 0);
+    stateMachine.getSharedData().syphonOut.end();
+    
 	// initialise state machine
 	stateMachine.addState<Bedroom>();
 	stateMachine.addState<Office>();
     stateMachine.addState<Dining>();
     stateMachine.addState<Library>();
     stateMachine.addState<Cinema>();
-	stateMachine.changeState("dining");
+	stateMachine.changeState("cinema");
     
     //setup OSC receiver
     receiver.setup(PORT);
+    
+    //setup syphon
+    syphonOutput.setName("Texture Output");
+    
+    //mask shaders
+    stateMachine.getSharedData().maskShader.load("shaders/composite");
+    
+    //pos utils
+    stateMachine.getSharedData().xPos = 0;
+    stateMachine.getSharedData().yPos = 0;
     
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
+    // Clear with alpha, so we can capture via syphon and composite elsewhere should we want.
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    stateMachine.getSharedData().syphonOut.begin();
+        ofClear(0, 0, 0);
+        stateMachine.getSharedData().wallOne.draw(0, 0);
+        stateMachine.getSharedData().wallTwo.draw(935, 0);
+    stateMachine.getSharedData().syphonOut.end();
+    
+    
     //process OSC messages
+    
     oscReceive();
     
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
+    
+    ofDisableAlphaBlending();
+    stateMachine.getSharedData().syphonOut.draw(0, 0);
+    ofDrawBitmapString(ofToString(ofGetFrameRate()), 30, 50);
+    
+    
+    ofDrawBitmapString(ofToString("xPos: " + ofToString(stateMachine.getSharedData().xPos) + " / yPos: " + ofToString(stateMachine.getSharedData().yPos)), 30, 70);
+    
+    ofTexture tex = stateMachine.getSharedData().syphonOut.getTextureReference();
+    syphonOutput.publishTexture( &tex );
+    
+    ofEnableAlphaBlending();
 }
 
 //--------------------------------------------------------------
@@ -73,6 +115,30 @@ void testApp::oscReceive(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
+    
+    switch (key) {
+        case OF_KEY_UP:
+            stateMachine.getSharedData().yPos -= stateMachine.getSharedData().inc;
+            break;
+        case OF_KEY_DOWN:
+            stateMachine.getSharedData().yPos+= stateMachine.getSharedData().inc;
+            break;
+        case OF_KEY_RIGHT:
+            stateMachine.getSharedData().xPos+=stateMachine.getSharedData().inc;
+            break;
+        case OF_KEY_LEFT:
+            stateMachine.getSharedData().xPos-=stateMachine.getSharedData().inc;
+            break;
+        case '1':
+            stateMachine.getSharedData().inc = 1;
+            break;
+        case '2':
+            stateMachine.getSharedData().inc = 10;
+            break;
+            
+        default:
+            break;
+    }
 
 }
 

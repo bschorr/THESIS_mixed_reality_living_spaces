@@ -75,7 +75,7 @@ void PendulumClock::draw(int x, int y, int w, int h) {
         ofTranslate(x, y);
     
         ofPushMatrix();{
-            ofTranslate(0, h*0.4);
+            ofTranslate(0, h*0.45);
             pendulumBkg.draw(0, 0, w, h);
             
             int pendPos = ofGetElapsedTimeMillis() % 2000;
@@ -93,7 +93,7 @@ void PendulumClock::draw(int x, int y, int w, int h) {
                 float rotPos = sin(ofMap(pendPos, 1500, 2000, HALF_PI, 0)) * -20.0;
                 ofRotate(rotPos);
             }
-            
+            ofTranslate(0, -h*0.05);
             pendulum.draw(0, 0, w, h);
         }ofPopMatrix();
         
