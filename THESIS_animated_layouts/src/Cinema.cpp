@@ -52,4 +52,5 @@ string Cinema::getName()
 
 void Cinema::stateExit() {
     vidPlayer->stop();
+    getSharedData().isTransition = true;
 }

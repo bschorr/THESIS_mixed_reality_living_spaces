@@ -31,6 +31,8 @@
 		AB0B85F9190B5E67002320F2 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0B85F2190B5E67002320F2 /* Syphon.framework */; };
 		AB0B85FA190B5E67002320F2 /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0B85F5190B5E67002320F2 /* SyphonNameboundClient.m */; };
 		AB0B85FC190B5EBB002320F2 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AB0B85F2190B5E67002320F2 /* Syphon.framework */; };
+		AB5E798D1914702D00E67751 /* transitionOne.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5E798B1914702D00E67751 /* transitionOne.cpp */; };
+		AB77D5EC19135E67008FD1EE /* ofxFXObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB77D5E119135E67008FD1EE /* ofxFXObject.cpp */; };
 		ABC0A10B190C7E6600EEC7D0 /* ofxImageMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC0A109190C7E6600EEC7D0 /* ofxImageMask.cpp */; };
 		ABC0A11B190C89E300EEC7D0 /* ofxAVFVideoPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = ABC0A118190C89E300EEC7D0 /* ofxAVFVideoPlayer.mm */; };
 		ABC0A11C190C89E300EEC7D0 /* ofxAVFVideoRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC0A11A190C89E300EEC7D0 /* ofxAVFVideoRenderer.m */; };
@@ -140,6 +142,41 @@
 		AB0B85F2190B5E67002320F2 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
 		AB0B85F4190B5E67002320F2 /* SyphonNameboundClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyphonNameboundClient.h; sourceTree = "<group>"; };
 		AB0B85F5190B5E67002320F2 /* SyphonNameboundClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyphonNameboundClient.m; sourceTree = "<group>"; };
+		AB5E798B1914702D00E67751 /* transitionOne.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transitionOne.cpp; sourceTree = "<group>"; };
+		AB5E798C1914702D00E67751 /* transitionOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transitionOne.h; sourceTree = "<group>"; };
+		AB77D5C819135E67008FD1EE /* ofxBlend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBlend.h; sourceTree = "<group>"; };
+		AB77D5C919135E67008FD1EE /* ofxClone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxClone.h; sourceTree = "<group>"; };
+		AB77D5CA19135E67008FD1EE /* ofxMask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxMask.h; sourceTree = "<group>"; };
+		AB77D5CB19135E67008FD1EE /* ofxMultiTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxMultiTexture.h; sourceTree = "<group>"; };
+		AB77D5CD19135E67008FD1EE /* ofxBarrelChromaAb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBarrelChromaAb.h; sourceTree = "<group>"; };
+		AB77D5CE19135E67008FD1EE /* ofxBloom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBloom.h; sourceTree = "<group>"; };
+		AB77D5CF19135E67008FD1EE /* ofxBlur.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBlur.h; sourceTree = "<group>"; };
+		AB77D5D019135E67008FD1EE /* ofxBokeh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBokeh.h; sourceTree = "<group>"; };
+		AB77D5D119135E67008FD1EE /* ofxChromaAb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxChromaAb.h; sourceTree = "<group>"; };
+		AB77D5D219135E67008FD1EE /* ofxChromaGlitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxChromaGlitch.h; sourceTree = "<group>"; };
+		AB77D5D319135E67008FD1EE /* ofxContrast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxContrast.h; sourceTree = "<group>"; };
+		AB77D5D419135E67008FD1EE /* ofxGaussianBlur.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxGaussianBlur.h; sourceTree = "<group>"; };
+		AB77D5D519135E67008FD1EE /* ofxGlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxGlow.h; sourceTree = "<group>"; };
+		AB77D5D619135E67008FD1EE /* ofxGrayscale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxGrayscale.h; sourceTree = "<group>"; };
+		AB77D5D719135E67008FD1EE /* ofxInverse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxInverse.h; sourceTree = "<group>"; };
+		AB77D5D819135E67008FD1EE /* ofxLUT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxLUT.h; sourceTree = "<group>"; };
+		AB77D5D919135E67008FD1EE /* ofxMedian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxMedian.h; sourceTree = "<group>"; };
+		AB77D5DA19135E67008FD1EE /* ofxOldTv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOldTv.h; sourceTree = "<group>"; };
+		AB77D5DC19135E67008FD1EE /* ofxFire.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFire.h; sourceTree = "<group>"; };
+		AB77D5DD19135E67008FD1EE /* ofxGrayScott.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxGrayScott.h; sourceTree = "<group>"; };
+		AB77D5DE19135E67008FD1EE /* ofxNoise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxNoise.h; sourceTree = "<group>"; };
+		AB77D5DF19135E67008FD1EE /* ofxTint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxTint.h; sourceTree = "<group>"; };
+		AB77D5E019135E67008FD1EE /* ofxFX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFX.h; sourceTree = "<group>"; };
+		AB77D5E119135E67008FD1EE /* ofxFXObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFXObject.cpp; sourceTree = "<group>"; };
+		AB77D5E219135E67008FD1EE /* ofxFXObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFXObject.h; sourceTree = "<group>"; };
+		AB77D5E319135E67008FD1EE /* ofxSwapBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxSwapBuffer.h; sourceTree = "<group>"; };
+		AB77D5E519135E67008FD1EE /* ofxAbsDiff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxAbsDiff.h; sourceTree = "<group>"; };
+		AB77D5E619135E67008FD1EE /* ofxBounce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBounce.h; sourceTree = "<group>"; };
+		AB77D5E719135E67008FD1EE /* ofxDisplacePixels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDisplacePixels.h; sourceTree = "<group>"; };
+		AB77D5E819135E67008FD1EE /* ofxNormals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxNormals.h; sourceTree = "<group>"; };
+		AB77D5E919135E67008FD1EE /* ofxRipples.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxRipples.h; sourceTree = "<group>"; };
+		AB77D5EA19135E67008FD1EE /* ofxSubstract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxSubstract.h; sourceTree = "<group>"; };
+		AB77D5EB19135E67008FD1EE /* ofxThreshold.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxThreshold.h; sourceTree = "<group>"; };
 		ABC0A109190C7E6600EEC7D0 /* ofxImageMask.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxImageMask.cpp; sourceTree = "<group>"; };
 		ABC0A10A190C7E6600EEC7D0 /* ofxImageMask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxImageMask.h; sourceTree = "<group>"; };
 		ABC0A117190C89E300EEC7D0 /* ofxAVFVideoPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxAVFVideoPlayer.h; sourceTree = "<group>"; };
@@ -392,6 +429,96 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		AB5E798A1914701C00E67751 /* transitions */ = {
+			isa = PBXGroup;
+			children = (
+				AB5E798B1914702D00E67751 /* transitionOne.cpp */,
+				AB5E798C1914702D00E67751 /* transitionOne.h */,
+			);
+			name = transitions;
+			sourceTree = "<group>";
+		};
+		AB77D5C519135E67008FD1EE /* ofxFX */ = {
+			isa = PBXGroup;
+			children = (
+				AB77D5C619135E67008FD1EE /* src */,
+			);
+			name = ofxFX;
+			sourceTree = "<group>";
+		};
+		AB77D5C619135E67008FD1EE /* src */ = {
+			isa = PBXGroup;
+			children = (
+				AB77D5C719135E67008FD1EE /* composers */,
+				AB77D5CC19135E67008FD1EE /* filters */,
+				AB77D5DB19135E67008FD1EE /* generative */,
+				AB77D5E019135E67008FD1EE /* ofxFX.h */,
+				AB77D5E119135E67008FD1EE /* ofxFXObject.cpp */,
+				AB77D5E219135E67008FD1EE /* ofxFXObject.h */,
+				AB77D5E319135E67008FD1EE /* ofxSwapBuffer.h */,
+				AB77D5E419135E67008FD1EE /* operations */,
+			);
+			name = src;
+			path = ../../../addons/ofxFX/src;
+			sourceTree = "<group>";
+		};
+		AB77D5C719135E67008FD1EE /* composers */ = {
+			isa = PBXGroup;
+			children = (
+				AB77D5C819135E67008FD1EE /* ofxBlend.h */,
+				AB77D5C919135E67008FD1EE /* ofxClone.h */,
+				AB77D5CA19135E67008FD1EE /* ofxMask.h */,
+				AB77D5CB19135E67008FD1EE /* ofxMultiTexture.h */,
+			);
+			path = composers;
+			sourceTree = "<group>";
+		};
+		AB77D5CC19135E67008FD1EE /* filters */ = {
+			isa = PBXGroup;
+			children = (
+				AB77D5CD19135E67008FD1EE /* ofxBarrelChromaAb.h */,
+				AB77D5CE19135E67008FD1EE /* ofxBloom.h */,
+				AB77D5CF19135E67008FD1EE /* ofxBlur.h */,
+				AB77D5D019135E67008FD1EE /* ofxBokeh.h */,
+				AB77D5D119135E67008FD1EE /* ofxChromaAb.h */,
+				AB77D5D219135E67008FD1EE /* ofxChromaGlitch.h */,
+				AB77D5D319135E67008FD1EE /* ofxContrast.h */,
+				AB77D5D419135E67008FD1EE /* ofxGaussianBlur.h */,
+				AB77D5D519135E67008FD1EE /* ofxGlow.h */,
+				AB77D5D619135E67008FD1EE /* ofxGrayscale.h */,
+				AB77D5D719135E67008FD1EE /* ofxInverse.h */,
+				AB77D5D819135E67008FD1EE /* ofxLUT.h */,
+				AB77D5D919135E67008FD1EE /* ofxMedian.h */,
+				AB77D5DA19135E67008FD1EE /* ofxOldTv.h */,
+			);
+			path = filters;
+			sourceTree = "<group>";
+		};
+		AB77D5DB19135E67008FD1EE /* generative */ = {
+			isa = PBXGroup;
+			children = (
+				AB77D5DC19135E67008FD1EE /* ofxFire.h */,
+				AB77D5DD19135E67008FD1EE /* ofxGrayScott.h */,
+				AB77D5DE19135E67008FD1EE /* ofxNoise.h */,
+				AB77D5DF19135E67008FD1EE /* ofxTint.h */,
+			);
+			path = generative;
+			sourceTree = "<group>";
+		};
+		AB77D5E419135E67008FD1EE /* operations */ = {
+			isa = PBXGroup;
+			children = (
+				AB77D5E519135E67008FD1EE /* ofxAbsDiff.h */,
+				AB77D5E619135E67008FD1EE /* ofxBounce.h */,
+				AB77D5E719135E67008FD1EE /* ofxDisplacePixels.h */,
+				AB77D5E819135E67008FD1EE /* ofxNormals.h */,
+				AB77D5E919135E67008FD1EE /* ofxRipples.h */,
+				AB77D5EA19135E67008FD1EE /* ofxSubstract.h */,
+				AB77D5EB19135E67008FD1EE /* ofxThreshold.h */,
+			);
+			path = operations;
+			sourceTree = "<group>";
+		};
 		ABC0A107190C7E6600EEC7D0 /* ofxImageMask */ = {
 			isa = PBXGroup;
 			children = (
@@ -442,6 +569,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				AB77D5C519135E67008FD1EE /* ofxFX */,
 				ABC0A115190C89E300EEC7D0 /* ofxAVFVideoPlayer */,
 				ABC0A107190C7E6600EEC7D0 /* ofxImageMask */,
 				AB0B85E5190B5E67002320F2 /* ofxSyphon */,
@@ -551,6 +679,7 @@
 				AB0B85E2190A2606002320F2 /* Clock.cpp */,
 				AB0B85E3190A2606002320F2 /* Clock.h */,
 				AB0B85D2190A1044002320F2 /* SharedData.h */,
+				AB5E798A1914701C00E67751 /* transitions */,
 				AB0B85C8190A03AC002320F2 /* bedroom */,
 				AB0B85CA190A03CC002320F2 /* office */,
 				AB0B85CD190A03F8002320F2 /* dining */,
@@ -680,6 +809,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB77D5EC19135E67008FD1EE /* ofxFXObject.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				ABC0A11B190C89E300EEC7D0 /* ofxAVFVideoPlayer.mm in Sources */,
@@ -693,6 +823,7 @@
 				ABC0A11C190C89E300EEC7D0 /* ofxAVFVideoRenderer.m in Sources */,
 				ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */,
 				67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */,
+				AB5E798D1914702D00E67751 /* transitionOne.cpp in Sources */,
 				AB0B85FA190B5E67002320F2 /* SyphonNameboundClient.m in Sources */,
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,
 				AB0B85D8190A1297002320F2 /* Bedroom.cpp in Sources */,

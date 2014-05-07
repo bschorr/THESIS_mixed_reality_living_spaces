@@ -9,48 +9,48 @@
     <Kind>11</Kind>
     <Name>Crop Origin</Name>
     <XValue>100.886695862</XValue>
-    <YValue>44.926105499</YValue>
+    <YValue>30.738916397</YValue>
 </Widget>
 <Widget>
     <Kind>11</Kind>
     <Name>Crop Size</Name>
-    <XValue>425.615783691</XValue>
-    <YValue>352.315277100</YValue>
+    <XValue>435.073883057</XValue>
+    <YValue>427.980316162</YValue>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>Low Near Threshold</Name>
-    <Value>114.310348511</Value>
+    <Value>118.078819275</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>Low Far Threshold</Name>
-    <Value>81.650245667</Value>
+    <Value>91.699508667</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>High Near Threshold</Name>
-    <Value>133.152709961</Value>
+    <Value>149.482757568</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>High Far Threshold</Name>
-    <Value>114.310348511</Value>
+    <Value>118.078819275</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>Angle</Name>
-    <Value>-24.975370407</Value>
+    <Value>-13.448275566</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>Minimum Blob Size</Name>
-    <Value>5172.413574219</Value>
+    <Value>6059.113281250</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>Maximum Blob Size</Name>
-    <Value>30000.000000000</Value>
+    <Value>35073.890625000</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>

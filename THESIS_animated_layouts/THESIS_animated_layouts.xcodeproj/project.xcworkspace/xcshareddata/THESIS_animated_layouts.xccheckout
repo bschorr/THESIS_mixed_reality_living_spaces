@@ -20,6 +20,8 @@
 		<string>https://github.com/kronick/ofxAVFVideoPlayer</string>
 		<key>7EC62A28-3970-45DD-AB23-234D2E48AE49</key>
 		<string>https://github.com/bschorr/THESIS_mixed_reality_living_spaces</string>
+		<key>962A4E5C-C7BB-47A6-9ABA-AE9CA0E7AC62</key>
+		<string>https://github.com/patriciogonzalezvivo/ofxFX</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>THESIS_animated_layouts/THESIS_animated_layouts.xcodeproj/project.xcworkspace</string>
@@ -35,6 +37,8 @@
 		<string>../../../../../addons/ofxAVFVideoPlayer</string>
 		<key>7EC62A28-3970-45DD-AB23-234D2E48AE49</key>
 		<string>../../..</string>
+		<key>962A4E5C-C7BB-47A6-9ABA-AE9CA0E7AC62</key>
+		<string>../../../../../addons/ofxFX</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/bschorr/THESIS_mixed_reality_living_spaces</string>
@@ -51,6 +55,14 @@
 			<string>62A09084-CC75-441B-A5FF-EFA28FB36011</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxAVFVideoPlayer</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>962A4E5C-C7BB-47A6-9ABA-AE9CA0E7AC62</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxFX</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

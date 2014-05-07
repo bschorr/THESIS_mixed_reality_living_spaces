@@ -6,6 +6,11 @@
 #include "SharedData.h"
 #include "Clock.h"
 #include "ofxSyphon.h"
+#include "ofxFXObject.h"
+#include "ofxGaussianBlur.h"
+#include "ofxBokeh.h"
+#include "transitionOne.h"
+
 
 #define PORT 12345
 #define NUM_MSG_STRINGS 20
@@ -34,6 +39,14 @@ class testApp : public ofBaseApp{
     
         //syphon things out
         ofxSyphonServer syphonOutput;
+    
+        //shaders
+        ofxGaussianBlur gaussianBlur;
+        ofxBokeh bokeh;
+        ofxFXObject test;
+    
+        //transitions
+        transitionOne transition;
     
     private:
     //to control states

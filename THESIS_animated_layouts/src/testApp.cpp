@@ -9,14 +9,17 @@
 void testApp::setup(){
 
     ofSetVerticalSync(true);
+    ofSetBackgroundAuto(false);
     //ofEnableAlphaBlending();
     //ofEnableSmoothing();
     
     //setup shared data
-	stateMachine.getSharedData().syphonOut.allocate(1870, 800, GL_RGBA);
+	stateMachine.getSharedData().wallComplete.allocate(1870, 800, GL_RGBA);
+    stateMachine.getSharedData().syphonOut.allocate(1870, 800, GL_RGBA);
     stateMachine.getSharedData().wallOne.allocate(935, 800, GL_RGBA);
     stateMachine.getSharedData().wallTwo.allocate(935, 800, GL_RGBA);
-	
+	stateMachine.getSharedData().isTransition = false;
+    
     stateMachine.getSharedData().syphonOut.begin();
         ofClear(255,255,255, 0);
     stateMachine.getSharedData().syphonOut.end();
@@ -27,7 +30,7 @@ void testApp::setup(){
     stateMachine.addState<Dining>();
     stateMachine.addState<Library>();
     stateMachine.addState<Cinema>();
-	stateMachine.changeState("cinema");
+	stateMachine.changeState("office");
     
     //setup OSC receiver
     receiver.setup(PORT);
@@ -42,26 +45,58 @@ void testApp::setup(){
     stateMachine.getSharedData().xPos = 0;
     stateMachine.getSharedData().yPos = 0;
     
+    //shaders
+    gaussianBlur.allocate(1870, 800);
+    gaussianBlur.setPasses(10);
+    
+    bokeh.allocate(1870, 800);
+    
+    //transitions
+    transition.setup( &stateMachine );
+
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
     // Clear with alpha, so we can capture via syphon and composite elsewhere should we want.
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClearColor(0.0, 0.0, 0.0, 0.0);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    stateMachine.getSharedData().syphonOut.begin();
+    stateMachine.getSharedData().wallComplete.begin();
         ofClear(0, 0, 0);
         stateMachine.getSharedData().wallOne.draw(0, 0);
         stateMachine.getSharedData().wallTwo.draw(935, 0);
-    stateMachine.getSharedData().syphonOut.end();
+    stateMachine.getSharedData().wallComplete.end();
+    
+    if (stateMachine.getSharedData().isTransition) {
+        transition.update();
+        stateMachine.getSharedData().syphonOut.begin();
+        ofEnableAlphaBlending();
+        stateMachine.getSharedData().maskFrames(stateMachine.getSharedData().wallComplete, transition.fbo);
+        ofDisableAlphaBlending();
+        stateMachine.getSharedData().syphonOut.end();
+    } else {
+        stateMachine.getSharedData().syphonOut.begin();
+        stateMachine.getSharedData().wallComplete.draw(0, 0);
+        stateMachine.getSharedData().syphonOut.end();
+    }
+    
+    
     
     
     //process OSC messages
     
     oscReceive();
     
+    //shaders
+    //gaussianBlur.setTexture(stateMachine.getSharedData().syphonOut.getTextureReference());
+    //gaussianBlur.setRadius(stateMachine.getSharedData().yPos);
+    //gaussianBlur.update();
+    
+    bokeh.setRadius(stateMachine.getSharedData().yPos);
+    bokeh.setTexture(stateMachine.getSharedData().syphonOut.getTextureReference());
+    bokeh.update();
 }
 
 //--------------------------------------------------------------
@@ -69,10 +104,15 @@ void testApp::draw(){
     
     ofDisableAlphaBlending();
     stateMachine.getSharedData().syphonOut.draw(0, 0);
+    //gaussianBlur.draw();
+    //bokeh.draw();
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 30, 50);
     
-    
     ofDrawBitmapString(ofToString("xPos: " + ofToString(stateMachine.getSharedData().xPos) + " / yPos: " + ofToString(stateMachine.getSharedData().yPos)), 30, 70);
+    
+    //ofCircle(30, 30, 50);
+    //transition.update();
+    //transition.draw();
     
     ofTexture tex = stateMachine.getSharedData().syphonOut.getTextureReference();
     syphonOutput.publishTexture( &tex );

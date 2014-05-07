@@ -103,4 +103,5 @@ string Office::getName()
 
 void Office::stateExit() {
     vidPlayer->stop();
+    getSharedData().isTransition = true;
 }

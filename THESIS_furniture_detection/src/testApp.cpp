@@ -11,6 +11,15 @@ void testApp::setup(){
 	setGui();
     
     verdana.loadFont("verdana.ttf", 72, true, true);
+    
+    //OSC config
+    currentRoom = "no room selected!";
+    previousRoom = currentRoom;
+    stateChanged = false;
+    timeStamp = 0.0;
+    
+	// open an outgoing connection to HOST:PORT
+	sender.setup(HOST, PORT);
 
 }
 
@@ -71,11 +80,12 @@ void testApp::update(){
         resetCurrentRoom();
         bDrawLibrary = true;
     } else if (
-               lowBlobNum == 1 &&
+               lowBlobNum <= 2 &&
                highBlobNum == 0 &&
-               lowArea > 17000 &&
+               lowArea > 12000 &&
                highArea < 1000 &&
-               lowLargerBlob.width > lowLargerBlob.height
+               lowLargerBlob.width > lowLargerBlob.height &&
+               lowLargerBlob.pos.x < 200
                )
     {
         resetCurrentRoom();
@@ -83,9 +93,11 @@ void testApp::update(){
     } else if (
                lowBlobNum == 1 &&
                highBlobNum == 0 &&
-               lowArea > 17000 &&
+               lowArea > 16000 &&
                highArea < 1000 &&
-               lowLargerBlob.width < lowLargerBlob.height
+               lowLargerBlob.width < lowLargerBlob.height &&
+               lowLargerBlob.pos.x > 320
+               
                )
     {
         resetCurrentRoom();
@@ -112,21 +124,34 @@ void testApp::draw(){
     
     if (bDrawDebug) drawDebug();
     
-    string currentRoom;
-    
     if (bDrawDining) {
-        currentRoom = "Dining";
+        currentRoom = "dining";
     } else if (bDrawOffice) {
-        currentRoom = "Office";
+        currentRoom = "office";
     } else if (bDrawLibrary) {
-        currentRoom = "Library";
+        currentRoom = "library";
     } else if (bDrawBedroom) {
-        currentRoom = "Bedroom";
+        currentRoom = "bedroom";
     } else if (bDrawCinema) {
-        currentRoom = "Cinema";
+        currentRoom = "cinema";
     }
     
     verdana.drawString(currentRoom, 50, 350);
+    
+    if (currentRoom != previousRoom) {
+        stateChanged = true;
+        timeStamp = ofGetElapsedTimef();
+        previousRoom = currentRoom;
+    }
+    
+    if (stateChanged && ofGetElapsedTimef()-timeStamp >5.0 ) {
+        ofxOscMessage m;
+        m.setAddress("/room");
+        m.addStringArg(currentRoom);
+        sender.sendMessage(m);
+        stateChanged = false;
+        cout << "sending: " + currentRoom << endl;
+    }
     
 //    if (bDrawBedroom) cout << "drawing bedroom!" << endl;
 //    if (bDrawCinema) cout << "drawing cinema!" << endl;
@@ -285,11 +310,13 @@ void testApp::drawDebug(){
     
     ofSetColor(255);
     
-    lowGrayThresh.draw(10, 320, kinectPixels.width, kinectPixels.height);
-    lowContourFinder.draw(10, 320, kinectPixels.width, kinectPixels.height);
+    float mult = 0.8;
     
-    highGrayThresh.draw(420, 320, kinectPixels.width, kinectPixels.height);
-    highContourFinder.draw(420, 320, kinectPixels.width, kinectPixels.height);
+    lowGrayThresh.draw(10, 320, kinectPixels.width *mult, kinectPixels.height*mult);
+    lowContourFinder.draw(10, 320, kinectPixels.width*mult, kinectPixels.height*mult);
+    
+    highGrayThresh.draw(420, 320, kinectPixels.width*mult, kinectPixels.height*mult);
+    highContourFinder.draw(420, 320, kinectPixels.width*mult, kinectPixels.height*mult);
     
     std::stringstream mainDebug;
     
@@ -359,7 +386,7 @@ void testApp::setGui() {
     cvGui->addSlider("High Far Threshold", 0, 255, highFarThreshold);
     cvGui->addSlider("Angle", -30, 30, angle);
     cvGui->addSlider("Minimum Blob Size", 0, 30000, blobMinSize);
-    cvGui->addSlider("Maximum Blob Size", 0, 30000, blobMaxSize);
+    cvGui->addSlider("Maximum Blob Size", 0, 40000, blobMaxSize);
     cvGui->addToggle("Draw Debug", bDrawDebug);
     cvGui->autoSizeToFitWidgets();
     ofAddListener(cvGui->newGUIEvent,this,&testApp::guiEvent);

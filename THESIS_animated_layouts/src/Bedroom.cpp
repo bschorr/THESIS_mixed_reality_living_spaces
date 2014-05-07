@@ -88,4 +88,5 @@ string Bedroom::getName()
 void Bedroom::stateExit() {
     vidPlayerOne->stop();
     vidPlayerTwo->stop();
+    getSharedData().isTransition = true;
 }

@@ -5,6 +5,10 @@
 #include "ofxKinect.h"
 #include "ofxUI.h"
 #include "ofxXmlSettings.h"
+#include "ofxOsc.h"
+
+#define HOST "localhost"
+#define PORT 12345
 
 #define INPUTPIXELS 307200
 
@@ -99,5 +103,12 @@ class testApp : public ofBaseApp{
     
     //Debugging tools
     ofTrueTypeFont	verdana;
+    
+    //OSC config
+    ofxOscSender sender;
+    bool stateChanged;
+    float timeStamp;
+    string previousRoom;
+    string currentRoom;
     
 };

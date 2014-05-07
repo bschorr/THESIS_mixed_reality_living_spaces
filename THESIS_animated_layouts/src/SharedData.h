@@ -11,15 +11,17 @@ public:
     //put shared data here
     ofFbo wallOne;
     ofFbo wallTwo;
+    ofFbo wallComplete;
+    
 	ofFbo syphonOut;
+    bool isTransition;
     
     ofShader maskShader;
     int xPos, yPos;
     int inc;
     
-    void maskFrames( ofImage topLayer, ofImage mask, bool vidPlayerLoaded ){
-        if(vidPlayerLoaded) {
-            
+    void maskFrames( ofFbo topLayer, ofFbo mask ){
+        
             maskShader.begin();
             
             maskShader.setUniformTexture("Tex0", topLayer.getTextureReference(), 0);
@@ -43,11 +45,11 @@ public:
             
             glMultiTexCoord2d(GL_TEXTURE0_ARB, topLayer.getWidth(), 0);
             glMultiTexCoord2d(GL_TEXTURE1_ARB, mask.getWidth(), 0);
-            glVertex2f( 935, 0);
+            glVertex2f( 1870, 0);
             
             glMultiTexCoord2d(GL_TEXTURE0_ARB, topLayer.getWidth(), topLayer.getHeight());
             glMultiTexCoord2d(GL_TEXTURE1_ARB, mask.getWidth(), mask.getHeight());
-            glVertex2f( 935, ofGetHeight());
+            glVertex2f( 1870, ofGetHeight());
             
             glMultiTexCoord2d(GL_TEXTURE0_ARB, 0, topLayer.getHeight());
             glMultiTexCoord2d(GL_TEXTURE1_ARB, 0, mask.getHeight());
@@ -63,7 +65,6 @@ public:
             topLayer.getTextureReference().unbind();
             
             maskShader.end();
-        }
     }
 
     

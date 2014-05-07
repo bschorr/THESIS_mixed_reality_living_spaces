@@ -55,4 +55,5 @@ string Library::getName()
 
 void Library::stateExit() {
     vidPlayer->stop();
+    getSharedData().isTransition = true;
 }

@@ -53,4 +53,5 @@ string Dining::getName()
 
 void Dining::stateExit() {
     vidPlayer->stop();
+    getSharedData().isTransition = true;
 }
