@@ -39,8 +39,8 @@ void transitionOne::update() {
         p.size = 0.0;
         p.vel = ofRandom(0.5, 2.0);
         p.pos.set(ofRandom(1870), ofRandom(800));
-        p.alpha = ofRandom (1.0, 5.0);
-        
+        p.alpha = ofRandom (2.0, 7.0);
+       
         pList.push_back(p);
     }
     

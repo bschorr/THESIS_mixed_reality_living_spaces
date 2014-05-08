@@ -45,12 +45,6 @@ void testApp::setup(){
     stateMachine.getSharedData().xPos = 0;
     stateMachine.getSharedData().yPos = 0;
     
-    //shaders
-    gaussianBlur.allocate(1870, 800);
-    gaussianBlur.setPasses(10);
-    
-    bokeh.allocate(1870, 800);
-    
     //transitions
     transition.setup( &stateMachine );
 
@@ -58,10 +52,6 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-    
-    // Clear with alpha, so we can capture via syphon and composite elsewhere should we want.
-    //glClearColor(0.0, 0.0, 0.0, 0.0);
-    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     stateMachine.getSharedData().wallComplete.begin();
         ofClear(0, 0, 0);
@@ -82,21 +72,12 @@ void testApp::update(){
         stateMachine.getSharedData().syphonOut.end();
     }
     
-    
-    
-    
     //process OSC messages
-    
     oscReceive();
     
-    //shaders
-    //gaussianBlur.setTexture(stateMachine.getSharedData().syphonOut.getTextureReference());
-    //gaussianBlur.setRadius(stateMachine.getSharedData().yPos);
-    //gaussianBlur.update();
-    
-    bokeh.setRadius(stateMachine.getSharedData().yPos);
-    bokeh.setTexture(stateMachine.getSharedData().syphonOut.getTextureReference());
-    bokeh.update();
+    //reset color to white
+    ofClear (0, 0);
+    ofSetColor(255);
 }
 
 //--------------------------------------------------------------
@@ -104,15 +85,10 @@ void testApp::draw(){
     
     ofDisableAlphaBlending();
     stateMachine.getSharedData().syphonOut.draw(0, 0);
-    //gaussianBlur.draw();
-    //bokeh.draw();
+
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 30, 50);
     
     ofDrawBitmapString(ofToString("xPos: " + ofToString(stateMachine.getSharedData().xPos) + " / yPos: " + ofToString(stateMachine.getSharedData().yPos)), 30, 70);
-    
-    //ofCircle(30, 30, 50);
-    //transition.update();
-    //transition.draw();
     
     ofTexture tex = stateMachine.getSharedData().syphonOut.getTextureReference();
     syphonOutput.publishTexture( &tex );

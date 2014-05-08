@@ -40,11 +40,6 @@ class testApp : public ofBaseApp{
         //syphon things out
         ofxSyphonServer syphonOutput;
     
-        //shaders
-        ofxGaussianBlur gaussianBlur;
-        ofxBokeh bokeh;
-        ofxFXObject test;
-    
         //transitions
         transitionOne transition;
     
